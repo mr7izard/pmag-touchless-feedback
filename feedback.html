@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta 
+      name="viewport" 
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    >
+    <title>Feedback</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fthree.min.js?v=1597834303595"></script>
+    <script src="//js.leapmotion.com/leap-0.6.4.js" ></script>
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fleap-plugins-0.1.11pre.js?v=1597158637377"></script>
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fleap-widgets-0.1.0.js?v=1597158911046" ></script>
+  </head>  
+  <body>
+    <div class="header">
+      Push the button that best matches your experience.
+    </div>
+    <script>
+      'use strict'
+    
+      Leap.loop({background: true})
+        .use('transform', {
+          vr: 'desktop'
+      })
+        .use('boneHand', {
+          targetEl: document.body,
+          rendererOps: {antialias: true}
+      });
+      
+      let scene = Leap.loopController.plugins.boneHand.scene;
+      let camera = Leap.loopController.plugins.boneHand.camera;
+      let renderer = Leap.loopController.plugins.boneHand.renderer;
+      camera.position.set(0, 0.4, 0.45);
+      let loader = new THREE.TextureLoader();
+      
+      // let controls = new THREE.OrbitControls(camera);
+      
+      function createSmileys() {
+    
+        let circleGeo = new THREE.CircleGeometry(0.05, 60);
+      
+        let texture1 = loader.load("https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fsmiley-1.png?v=1597928902520");
+        // texture1.magFilter = THREE.NearestFilter;
+        let material1 = new THREE.MeshBasicMaterial({
+          map: texture1
+        });
+        let btnMesh1 = new THREE.Mesh(circleGeo, material1);
+        btnMesh1.name = "button-1";
+        btnMesh1.position.set(-0.24, 0.3, -0.1);
+        console.log(btnMesh1);
+        scene.add(btnMesh1);
+      
+        let button1 = new PushButton(new InteractablePlane(btnMesh1, Leap.loopController, {moveX: false, moveY: false}))
+          .on('press', mesh => {
+            mesh.material.map = null;
+            mesh.material.needsUpdate = true;
+            mesh.material.color.setHex(0x7474C1);
+            setTimeout(_=> {
+              location.replace("/thanks-happy.html");
+            }, 1000);
+          });
+        
+        let texture2 = loader.load("https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fsmiley-2.png?v=1597929032603");
+        let material2 = new THREE.MeshBasicMaterial({
+          map: texture2
+        });
+        let btnMesh2 = new THREE.Mesh(circleGeo, material2);
+        btnMesh2.name = "button-2";
+        btnMesh2.position.set(-0.12, 0.3, -0.1);
+        scene.add(btnMesh2);
+      
+        let button2 = new PushButton(new InteractablePlane(btnMesh2, Leap.loopController, {moveX: false, moveY: false}))
+        .on('press', mesh => {
+          mesh.material.map = null;
+          mesh.material.needsUpdate = true;
+          mesh.material.color.setHex(0x009B77);
+          setTimeout(_=> {
+              location.replace("/thanks-happy.html");
+            }, 1000);
+        });
+        
+        let texture3 = loader.load("https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fsmiley-3.png?v=1597929039813");
+        let material3 = new THREE.MeshBasicMaterial({
+          map: texture3
+        })
+        let btnMesh3 = new THREE.Mesh(circleGeo, material3);
+        btnMesh3.name = "button-3";
+        btnMesh3.position.set(0, 0.3, -0.1);
+        scene.add(btnMesh3);
+      
+        let button3 = new PushButton(new InteractablePlane(btnMesh3, Leap.loopController, {moveX: false, moveY: false}))
+        .on('press', mesh => {
+          mesh.material.map = null;
+          mesh.material.needsUpdate = true;
+          mesh.material.color.setHex(0x00A9E0);
+          setTimeout(_=> {
+              location.replace("/thanks-not-fussed.html");
+            }, 1000);
+        });
+        
+        let texture4 = loader.load("https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fsmiley-4.png?v=1597929050111");
+        let material4 = new THREE.MeshBasicMaterial({
+          map: texture4
+        })
+        let btnMesh4 = new THREE.Mesh(circleGeo, material4);
+        btnMesh4.name = "button-4";
+        btnMesh4.position.set(0.12, 0.3, -0.1);
+        scene.add(btnMesh4);
+      
+        let button4 = new PushButton(new InteractablePlane(btnMesh4, Leap.loopController, {moveX: false, moveY: false}))
+        .on('press', mesh => {
+          mesh.material.map = null;
+          mesh.material.needsUpdate = true;
+          mesh.material.color.setHex(0xE87722);
+          setTimeout(_=> {
+              location.replace("/thanks-sad.html");
+            }, 1000);
+        });
+        
+        let texture5 = loader.load("https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fsmiley-5.png?v=1597929057194");
+        let material5 = new THREE.MeshBasicMaterial({
+          map: texture5
+        })
+        let btnMesh5 = new THREE.Mesh(circleGeo, material5);
+        btnMesh5.name = "button-5";
+        btnMesh5.position.set(0.24, 0.3, -0.1);
+        scene.add(btnMesh5);
+      
+        let button5 = new PushButton(new InteractablePlane(btnMesh5, Leap.loopController, {moveX: false, moveY: false}))
+        .on('press', mesh => {
+          mesh.material.map = null;
+          mesh.material.needsUpdate = true;
+          mesh.material.color.setHex(0x994878);
+          setTimeout(_=> {
+              location.replace("/thanks-sad.html");
+            }, 1000);
+        });
+      }
+      
+      createSmileys();
+     
+    </script>
+  </body>
+</html>
