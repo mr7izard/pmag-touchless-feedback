@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta 
+      name="viewport" 
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    >
+    <title>thanks-3</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fthree.min.js?v=1597834303595"></script>
+    <script src="//js.leapmotion.com/leap-0.6.4.js" ></script>
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fleap-plugins-0.1.11pre.js?v=1597158637377"></script>
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fleap-widgets-0.1.0.js?v=1597158911046" ></script>
+  </head>
+  <body>
+    <h1>
+      Oh no!<br>That’s a shame we’d love to hear more about how we can improve our visitor experience.<br>
+      Email us <a>museumfeedback@culturepk.org.uk</a>
+    </h1>
+    <script>
+      Leap.loop({background: true})
+        .use('transform', {
+          vr: 'desktop'
+      })
+        .use('boneHand', {
+          targetEl: document.body,
+          rendererOps: {antialias: true}
+      });
+      
+      let scene = Leap.loopController.plugins.boneHand.scene;
+      let camera = Leap.loopController.plugins.boneHand.camera;
+      let renderer = Leap.loopController.plugins.boneHand.renderer;
+      camera.position.set(0, 0.4, 0.55);
+      
+      setTimeout(_=> {
+        location.replace("/");
+      }, 15000);
+    </script>
+  </body>
+</html>

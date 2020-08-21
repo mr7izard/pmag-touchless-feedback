@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta 
+      name="viewport" 
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    >
+    <title>Home</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fthree.min.js?v=1597834303595"></script>
+    <script src="//js.leapmotion.com/leap-0.6.4.js" ></script>
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fleap-plugins-0.1.11pre.js?v=1597158637377"></script>
+    <script src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fleap-widgets-0.1.0.js?v=1597158911046" ></script>
+  </head>  
+  <body>
+    <div class="header">
+      Hold your hands above the Leap Motion sensor to leave touchless feedback on your visit!
+    </div>
+    <div class="instructions">
+      <img class="leapMotion" src="https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2FLM-instuction.png?v=1597937408701">
+    </div>
+    <script >
+     'use strict'
+     
+      Leap.loop({background: true})
+        .use('transform', {
+          vr: 'desktop'
+      })
+        .use('boneHand', {
+          targetEl: document.body,
+          rendererOps: {antialias: true}
+      });
+      
+      let scene = Leap.loopController.plugins.boneHand.scene;
+      let camera = Leap.loopController.plugins.boneHand.camera;
+      let renderer = Leap.loopController.plugins.boneHand.renderer;
+      camera.position.set(0, 0.4, 0.55);
+      let loader = new THREE.TextureLoader();
+            
+      function createButton() {
+        
+        let texture = loader.load("https://cdn.glitch.com/83ff1dac-a3ed-4e20-8e0b-3e93ceb2173c%2Fsmiley-1(test1).png?v=1597928793529");
+        let material = new THREE.MeshBasicMaterial({
+          map: texture
+        });
+        let circleGeo = new THREE.CircleGeometry(0.1, 60);
+      
+        let btnMesh1 = new THREE.Mesh(circleGeo, material);
+        btnMesh1.name = "button-1";
+        btnMesh1.position.set(0, 0.3, -0.1);
+        scene.add(btnMesh1);
+      
+        let button1 = new PushButton(new InteractablePlane(btnMesh1, Leap.loopController, {moveX: false, moveY: false}))
+          .on('press', mesh => {
+            mesh.material.map = null;
+            mesh.material.needsUpdate = true;
+            mesh.material.color.setHex(0x85714D);
+            setTimeout(_=> {
+              location.replace("/feedback.html");
+            }, 1000);
+          });
+      }
+      
+      createButton();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+body {
+  background-color: #C5b9AC, 80%;
+  font-color: #2D2926;
+  font-family: futura;
+  margin: 0;
+}
+
+h1 {
+  position: absolute;
+  display: block;
+  font-size: 3em;
+  margin: 5%;
+}
+
+.header {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 2%;
+  font-size: 2em;
+  text-align: center;
+}
+
+
+a {
+  color: #00A9E0;
+}
+
+.instructions {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.leapMotion {
+  position: relative;
+  height: 300px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
